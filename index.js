@@ -1,7 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const routes = require('./routes/api');
+const connectDB = require('./config/db.js')
 const path = require('path');
 require('dotenv').config();
 
@@ -10,12 +9,18 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //connect to the database
-mongoose.connect(process.env.DB, { useNewUrlParser: true })
-  .then(() => console.log(`Database connected successfully`))
-  .catch(err => console.log(err));
+connectDB()
+// const { MongoClient } = require('mongodb');
+// const uri = "mongodb+srv://root:root@clustertasks.9hj1o.mongodb.net/Tasks?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
 
-//since mongoose promise is depreciated, we overide it with node's promise
-mongoose.Promise = global.Promise;
+
+// mongoose.Promise = global.Promise;
 
 // app.use(function (req, res, next) {
 //     var allowedOrigins = ['http://localhost:3000', 'http://tv-observer.herokuapp.com'];
@@ -28,7 +33,7 @@ mongoose.Promise = global.Promise;
 //     next();
 //   });
 
-app.use(bodyParser.json());
+
 
 app.use('/api', routes);
 

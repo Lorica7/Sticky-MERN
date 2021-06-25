@@ -1,22 +1,23 @@
-const mongoose = require('mongoose');
+ const { MongoClient } = require('mongodb');
 const config = require('config');
-const db = config.get('mongoURI');
+const uri = config.get('mongoURI');
 
 const connectDB = async () => {
+
+ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 	try {
-		await mongoose.connect(db, {
-			useNewUrlParser: true,
-			useCreateIndex: true,
-			useFindAndModify: false,
-			useUnifiedTopology: true
-		});
+		await client.connect(err => {
+		 const collection = client.db("test").collection("devices");
+		
+			 });
 
 		console.log('MongoDB Connected...');
 	} catch (err) {
 		console.error(err.message);
-		// Exit process with failure
-		process.exit(1);
+	
 	}
 };
+
+
 
 module.exports = connectDB;
