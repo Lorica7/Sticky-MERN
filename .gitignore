@@ -4,3 +4,5 @@ node_modules
 
 
 MONGOURI = mongodb+srv://root:root@clustertasks.9hj1o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+.env

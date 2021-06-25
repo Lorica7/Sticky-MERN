@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//create schema for todo
+
 const NoteSchema = new Schema({
     id: {
-        type: Number,
-        
-
+    type: Number,
+      unique: true
     },
   title: {
     type: String,
@@ -16,14 +15,10 @@ const NoteSchema = new Schema({
   description: {
     type: String,
     required: [true, 'The description field is required']
-    },
-    doesMatchSearch: {
-        type: Boolean,
-        default: true
-  }
+    }
+  
 })
 
-//create model for todo
 const Notes = mongoose.model('todo', NoteSchema);
 
 module.exports = Notes;
