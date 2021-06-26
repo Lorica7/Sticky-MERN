@@ -5,6 +5,7 @@ const Note = require('../models/Note.js')
 
 router.get('/',
   async (req, res) => {
+    console.log(req)
     try {
       let allNotes = await Note.find({})
      res.send(allNotes)
@@ -42,7 +43,7 @@ async  (req, res) => {
 
 router.get('/:id',
   async (req, res) => {
-
+    
     try {
       let foundNote = await Note.findOne({ "_id": req.params.id })
       res.send(foundNote)
@@ -53,7 +54,8 @@ router.get('/:id',
     }
   });
   
-  router.delete('/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
+ 
     Note.findOneAndDelete({"_id": req.params.id})
       .then(data => res.json(data))
       .catch(next)

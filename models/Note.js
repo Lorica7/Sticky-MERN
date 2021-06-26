@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const NoteSchema = new Schema({
     id: {
-    type: Number,
+    type: String,
       unique: true
     },
   title: {
@@ -14,11 +14,11 @@ const NoteSchema = new Schema({
   },
   description: {
     type: String,
-    required: [true, 'The description field is required']
+    required: true
     }
   
 })
 
-const Notes = mongoose.model('todo', NoteSchema);
+const Notes = mongoose.model('note', NoteSchema);
 
 module.exports = Notes;
